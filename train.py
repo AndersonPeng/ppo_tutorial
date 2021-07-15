@@ -59,8 +59,8 @@ def train(env, runner, policy_net, value_net, agent, max_episode=5000):
             print("actor loss = {:.6f}".format(pg_loss))
             print("critic loss = {:.6f}".format(v_loss))
             print("entropy = {:.6f}".format(ent))
-            print("mean return = {:.6f}".format(mean_total_reward / 100))
-            print("mean length = {:.2f}".format(mean_length / 100))
+            print("mean return = {:.6f}".format(mean_total_reward / 200))
+            print("mean length = {:.2f}".format(mean_length / 200))
             print("\nSaving the model ... ", end="")
             torch.save({
                 "it": i,

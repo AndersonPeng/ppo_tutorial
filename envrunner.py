@@ -32,7 +32,7 @@ class EnvRunner:
 
         return returns
     
-    #Compute generalized advantage estimation
+    #Compute generalized advantage estimation (Optional)
     def compute_gae(self, rewards, values, last_value):
         advs = np.zeros_like(rewards)
         n_step = len(rewards)
@@ -51,8 +51,7 @@ class EnvRunner:
 
     #Run an episode using the policy net & value net
     def run(self, env, policy_net, value_net):
-        #1. Run an episode
-        #-------------------------------------
+        #Run an episode
         state = env.reset()   #Initial state
         episode_len = self.max_step
 
@@ -77,8 +76,7 @@ class EnvRunner:
                 episode_len = step + 1
                 break
         
-        #2. Compute returns
-        #-------------------------------------
+        #Compute returns
         last_value = value_net(
             torch.tensor(np.expand_dims(state, axis=0), dtype=torch.float32, device=self.device)
         ).cpu().numpy()
@@ -91,7 +89,6 @@ class EnvRunner:
             last_value
         )
         '''
-
         return self.mb_states[:episode_len], \
                 self.mb_actions[:episode_len], \
                 self.mb_a_logps[:episode_len], \
